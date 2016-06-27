@@ -1,8 +1,11 @@
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 import database.settings
+from database import WED_attribute
 
+Base = declarative_base()
 class DAO:
 
     readxml = None
