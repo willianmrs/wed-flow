@@ -8,7 +8,7 @@ class DAO:
     readxml = None
 
     def __init__(self):
-        self.engine = create_engine(URL(**settings.DATABASE))
+        self.engine = create_engine(URL(**database.settings.DATABASE))
         #DAO.readxml = DAO.readxml('../xml/B1.xml')
         Session = sessionmaker(bind=self.engine)
         self.session = Session()    
