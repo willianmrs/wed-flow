@@ -21,13 +21,13 @@ class DAO:
         self.engine
 
     def create_tables(self):
-        #Base.metadata.create_all(self.engine)
-        WED_attribute.__table__.create(self.engine)
-        WED_condition.__table__.create(self.engine)
-        WED_transition.__table__.create(self.engine)
-        WED_flow.__table__.create(self.engine)
-        WED_trigger.__table__.create(self.engine)
-        Instance.__table__.create(self.engine)
+        Base.metadata.create_all(self.engine)
+        # WED_attribute.__table__.create(self.engine)
+        # WED_condition.__table__.create(self.engine)
+        # WED_transition.__table__.create(self.engine)
+        # WED_flow.__table__.create(self.engine)
+        # WED_trigger.__table__.create(self.engine)
+        # Instance.__table__.create(self.engine)
         #tabelas history e instance será criadas depois da wed_state
         #History_entry.__table__.create(self.engine)
         #Interruption.__table__.create(self.engine)

@@ -30,13 +30,13 @@ class Readxml:
 
         #print(data)
 
-        state_file = open('WED_state.py', 'r')
+        state_file = open('database/WED_state.py', 'r')
         data_file = state_file.read()
         #favor não retirar o tab da string abaixo
         new_data = data_file.replace('    attribute = Column(String(50))', data)
         state_file.close()
 
-        state_file = open('WED_state.py', 'w')
+        state_file = open('database/WED_state.py', 'w')
         state_file.write(new_data)
         state_file.close()
 
