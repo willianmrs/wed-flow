@@ -1,14 +1,13 @@
 from sqlalchemy import Integer, Column, create_engine, ForeignKey, String, DateTime
 from sqlalchemy.orm import relationship, Session
-from sqlalchemy.ext.declarative import declarative_base
 from database.Associations import *
 from database.Instance import *
 from database.WED_state import *
 from database.Interruption import *
 from database.WED_transition import *
 
-engine = None
-session = None
+from database.base import Base
+
 
 class History_entry(Base):
     __tablename__ = 'history_entry'

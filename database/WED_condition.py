@@ -2,6 +2,7 @@ from sqlalchemy import Integer, Column, create_engine, ForeignKey, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from database.Associations import *
+from database.base import Base
 
 class WED_condition(Base):
     __tablename__ = 'wed_condition'

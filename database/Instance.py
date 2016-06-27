@@ -7,8 +7,8 @@ from database.WED_state import *
 from database.Interruption import *
 from database.History_entry import *
 
-engine = None
-session = None
+from database.base import Base
+
 
 class Instance(Base):
     __tablename__ = 'instance'

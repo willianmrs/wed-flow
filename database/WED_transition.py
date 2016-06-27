@@ -5,8 +5,8 @@ from database.Associations import *
 from database.History_entry import *
 from database.WED_trigger import *
 
-engine = None
-session = None
+from database.base import Base
+
 
 class WED_transition(Base):
     __tablename__ = 'wed_transition'

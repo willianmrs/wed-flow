@@ -1,11 +1,11 @@
 import sys
 import xmltodict
-from database.WED_condition import *
-from database.WED_flow import *
-from database.WED_state import *
-from database.WED_transition import *
-from database.WED_trigger import *
-from database.WED_attribute import *
+# from database.WED_condition import *
+# from database.WED_flow import *
+# from database.WED_state import *
+# from database.WED_transition import *
+# from database.WED_trigger import *
+# from database.WED_attribute import *
 
 class Readxml:
 
@@ -41,18 +41,8 @@ class Readxml:
         state_file.close()
 
     def data_wed_attributes(self):
-        d = dict()
         d = self.dict_xml['WED-flow-initial-schema']['WED-attributes']['Attribute']
-        list_obj_attr = list()
-        for data_attributes in d:
-            name = data_attributes['@Name']
-            type_ = data_attributes['@Type']
-
-            wed_attributes = WED_attribute(name=name, type_=type_)
-            list_obj_attr.append(wed_attributes);
-
-        Readxml.alter_table_state(self,list_obj_attr)
-        return list_obj_attr
+        return dict([(attr['@Name'], attr['@Type']) for attr in d])
 
     def data_wed_conditions(self):
         d = dict()

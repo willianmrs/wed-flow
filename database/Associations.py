@@ -1,6 +1,6 @@
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, ForeignKey
-Base = declarative_base()
+
+from database.base import Base
 
 wedState_wedTrigger = Table('wedState_wedTrigger', Base.metadata,
     Column('wed_state_id', Integer, ForeignKey('wed_state.id'), primary_key=True),

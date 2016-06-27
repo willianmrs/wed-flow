@@ -5,8 +5,7 @@ from database.Associations import *
 from database.Instance import *
 from database.History_entry import *
 
-engine = None
-session = None
+from database.base import Base
 
 class Interruption(Base):
     __tablename__ = 'interruption'

@@ -7,8 +7,7 @@ from database.WED_state import *
 from database.WED_transition import *
 from database.WED_condition import *
 
-engine = None
-session = None
+from database.base import Base
 
 ''' verificar se o tipo period eh mesmo string '''
 class WED_trigger(Base):

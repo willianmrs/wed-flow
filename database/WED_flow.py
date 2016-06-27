@@ -6,8 +6,8 @@ from database.WED_condition import *
 from database.Instance import *
 from database.WED_trigger import *
 
-engine = None
-session = None
+from database.base import Base
+
 
 class WED_flow(Base):
     __tablename__ = 'wed_flow'
