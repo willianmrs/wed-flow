@@ -14,13 +14,16 @@ class DAO:
     def __init__(self):
         self.engine = create_engine(URL(**database.settings.DATABASE))
         self.session = sessionmaker(bind=self.engine)()  
+        self.readxml = None
 
     def __del__(self):
         self.session.close_all()
 
+    def set_readxml(self, readxml):
+        self.readxml = readxml
 
     def create_tables(self):
-        attr = DAO.readxml.data_wed_attributes()
+        attr = self.readxml.data_wed_attributes()
         attributes = {}
 
         for name, type_ in attr.items():
@@ -28,7 +31,6 @@ class DAO:
                 attributes[name] = Column(String(50))
             else:
                 attributes[name] = Column(Integer)
-
 
         wed_state_colums = {
             '__tablename__' : 'wed_state',
@@ -52,9 +54,37 @@ class DAO:
         import database.WED_trigger
         Base.metadata.create_all(self.engine)
 
+    def insert(self):
+        import database.WED_attribute
 
+        list_attributes = self.readxml.data_wed_attributes()
+        list_attributes = [database.WED_attribute(name=name, type_=type_) \
+                            for name, type_ in list_attributes.items()]
+        
+        for attributes in list_attributes:
+            self.session.add(attributes)
+            self.session.commit()
 
+        list_conditions = self.readxml.data_wed_conditions()
+        for condition in list_conditions:
+            self.session.add(condition)
+            self.session.commit()   
 
+        list_flows = self.readxml.data_wed_flows()
+        for flows in list_flows:
+            self.session.add(flows)
+            self.session.flush()
+            self.session.commit()         
+
+        list_transitions = self.readxml.data_wed_transitions()
+        for transitions in list_transitions:
+            self.session.add(transitions)
+            self.session.commit()  
+
+        list_trigger = self.readxml.data_wed_trigger()
+        for trigger in list_trigger:
+            self.session.add(trigger)
+            self.session.commit()
 
 # Testar
     def select_condition(self, wed_condition):
@@ -72,5 +102,9 @@ class DAO:
     def select_flow(self, wed_flow):
         result = self.session.execute(
             "SELECT id FROM wed_flow WHERE name = '" + wed_flow + "'"
-        ).fetchone()
-        return result        
+        ).first()[0]
+        return result   
+
+    def test(self):
+        self.create_tables()
+        self.insert()
