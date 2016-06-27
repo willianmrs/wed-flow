@@ -1,5 +1,6 @@
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 import database.settings
 
 class DAO:
