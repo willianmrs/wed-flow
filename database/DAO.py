@@ -7,6 +7,15 @@ from sqlalchemy.ext.declarative import declarative_base
 import database.settings
 from database.base import Base
 
+import database.Interruption
+import database.History_entry
+import database.Instance
+import database.WED_attribute
+import database.WED_condition
+import database.WED_flow 
+import database.WED_transition
+import database.WED_trigger
+
 from database import Associations
 class DAO:
     readxml = None
@@ -15,12 +24,16 @@ class DAO:
         self.engine = create_engine(URL(**database.settings.DATABASE))
         self.session = sessionmaker(bind=self.engine)()  
         self.readxml = None
+        self.teste = None
 
     def __del__(self):
         self.session.close_all()
 
     def set_readxml(self, readxml):
         self.readxml = readxml
+
+    def drop_database(self):
+        Base.metadata.drop_all(self.engine)
 
     def create_tables(self):
         attr = self.readxml.data_wed_attributes()
@@ -44,14 +57,8 @@ class DAO:
         wed_state_colums = dict(list(wed_state_colums.items()) + list(attributes.items()))
 
         wed_state = type('WED_state', (Base,), wed_state_colums)
-        import database.Interruption
-        import database.History_entry
-        import database.Instance
-        import database.WED_attribute
-        import database.WED_condition
-        import database.WED_flow 
-        import database.WED_transition
-        import database.WED_trigger
+        self.teste = wed_state
+
         Base.metadata.create_all(self.engine)
 
     def insert(self):
@@ -108,3 +115,11 @@ class DAO:
     def test(self):
         self.create_tables()
         self.insert()
+
+    def select_trigger(self):
+        # a = self.session.execute("SELECT * FROM wed_trigger'")
+        # print(a.fetchall())
+        # a = self.session.query(database.WED_attribute).all()
+        a = self.session.query(database.WED_trigger).all()
+        for i in a:
+            print(i.period)

@@ -2,10 +2,6 @@ from sqlalchemy import Integer, Column, create_engine, ForeignKey, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from database.Associations import *
-from database.WED_flow import *
-from database.WED_state import *
-from database.WED_transition import *
-from database.WED_condition import *
 
 from database.base import Base
 
